@@ -1,0 +1,783 @@
+/* CSS Variables & Reset */
+:root {
+    --primary-color: #6C63FF;
+    /* Soft Indigo */
+    --secondary-color: #483D8B;
+    /* Dark Slate Blue */
+    --accent-color: #ff6b6b;
+    /* Soft Coral for errors/highlights */
+    --bg-color: #E6E6FA;
+    /* Lavender */
+    --glass-bg: rgba(230, 230, 250, 0.65);
+    /* Soft Lavender Tint */
+    --glass-border: rgba(255, 255, 255, 0.8);
+    /* Higher contrast border */
+    --text-main: #2D2D2D;
+    --text-light: #666;
+    --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    /* Animated Gradient Background: Soft Lavender, Light Blue, Off-White */
+    background: linear-gradient(-45deg, #E6E6FA, #F5F7FA, #B8C6DB, #E2E2F0);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Background Decoration */
+.watermark {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    pointer-events: none;
+    user-select: none;
+    padding: 2vh 0;
+}
+
+.watermark-row {
+    font-size: 7vw;
+    /* Slightly smaller for better fit */
+    font-weight: 800;
+    white-space: nowrap;
+    color: rgba(72, 61, 139, 0.045);
+    /* Increased visibility slightly */
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    /* Airy spacing */
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+    width: 150%;
+    /* Wider to cover offset */
+    margin-left: -15%;
+    /* Center alignment base */
+    word-spacing: 0.5em;
+    /* Spacing between words */
+}
+
+/* Create brick/offset pattern */
+.watermark-row:nth-child(even) {
+    margin-left: -35%;
+    /* Shift even rows */
+}
+
+/* Main Layout */
+.main-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+/* Glassmorphism Card */
+.booking-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    /* Reduced from 40px */
+    box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.22);
+    /* Strengthening shadow for depth */
+    transition: transform 0.3s ease;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Reduced from 30px */
+}
+
+.card-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.card-header p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Form Styling */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Reduced from 24px */
+}
+
+.form-group label,
+.section-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+}
+
+.section-label i,
+.form-group label i {
+    margin-right: 6px;
+    color: var(--primary-color);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+/* Inputs & Selects */
+input,
+select,
+textarea {
+    width: 100%;
+    height: 48px;
+    /* Consistent Height */
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: all 0.2s ease-in-out;
+    outline: none;
+    appearance: none;
+    /* Remove native styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+textarea {
+    height: auto;
+    padding: 12px 16px;
+    resize: none;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(108, 99, 255, 0.3);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #a0a0a0;
+}
+
+/* Specific spacing for Special Requests */
+.form-group.full-width {
+    margin-top: 8px;
+}
+
+/* Custom Select Dropdown */
+.custom-select {
+    position: relative;
+    user-select: none;
+    width: 100%;
+    z-index: 60;
+    /* Ensure it sits above subsequent inputs */
+}
+
+.custom-select-trigger {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-select-trigger:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(108, 99, 255, 0.3);
+}
+
+.custom-select.open .custom-select-trigger {
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.custom-select-trigger span {
+    color: #a0a0a0;
+    /* Placeholder color by default */
+}
+
+.custom-select-trigger.has-value span {
+    color: var(--text-main);
+}
+
+.custom-select-trigger i {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    transition: transform 0.2s;
+}
+
+.custom-select.open .custom-select-trigger i {
+    transform: rotate(180deg);
+}
+
+.custom-options {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    padding: 5px;
+}
+
+.custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-option {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-option:hover {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.custom-option.selected {
+    background: var(--primary-color);
+    color: white;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Custom Date Picker Carousel */
+.date-section {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 50;
+    /* Ensure dropdowns flow over form fields below */
+}
+
+.date-picker-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Reduced from 20px */
+}
+
+/* Wrapper for each date input section */
+.date-input-wrapper {
+    position: relative;
+    /* overflow: hidden; Removed to allow dropdowns */
+    z-index: 10;
+}
+
+/* Ensure Check-in (top) is above Check-out (bottom) for dropdown flow */
+.date-input-wrapper:first-child {
+    z-index: 20;
+}
+
+.month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 30;
+    /* Ensure header is above dates and other elements */
+}
+
+.date-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    font-weight: 600;
+    margin: 0;
+}
+
+.month-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Seamless Date Selection Styles */
+.title-wrapper {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    /* Fixed width prevents shifting */
+    height: 32px;
+    /* Fixed height strictly enforces layout stability */
+}
+
+.header-trigger {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    user-select: none;
+    display: inline-block;
+}
+
+.header-trigger:hover {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.header-trigger.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.header-dropdown {
+    position: absolute;
+    top: 0;
+    /* Align perfectly with top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* Match parent width exactly */
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.98);
+    /* Increased opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow */
+    padding: 5px;
+    z-index: 1000;
+    /* Force on top */
+    display: none;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+.header-dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+.header-dropdown::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.header-dropdown.show {
+    display: block;
+    animation: fadeIn 0.15s ease-out;
+}
+
+.dropdown-option {
+    padding: 8px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-option:hover {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.dropdown-option.selected {
+    background: var(--primary-color);
+    color: white;
+}
+
+
+/* Re-add focus/active stylings that might have been overridden by general input rules */
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: none;
+    /* Reset shadow for these specific selects to avoid heavy glow */
+}
+
+.month-nav button {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.month-nav button:hover {
+    background: rgba(108, 99, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.custom-date-carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    /* Space for scrollbar */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Removed scroll-snap for smoother free scrolling */
+    /* scroll-snap-type: x mandatory; */
+    cursor: grab;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+}
+
+.custom-date-carousel::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.date-card {
+    flex: 0 0 auto;
+    width: 60px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid transparent;
+    user-select: none;
+    scroll-snap-align: start;
+}
+
+.date-card:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.date-card.selected {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
+    /* Stronger glow */
+    transform: scale(1.05) translateY(-2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.date-card.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #e0e0e0;
+}
+
+.date-card .day-name {
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.date-card .day-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.submit-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(72, 61, 139, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Messages */
+.error-message {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-weight: 500;
+    min-height: 1.2em;
+    /* Prevent layout jump */
+}
+
+.form-message {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-top: 10px;
+    min-height: 20px;
+}
+
+.success {
+    color: #27ae60;
+}
+
+.error {
+    color: var(--accent-color);
+}
+
+/* Responsive */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-wrapper {
+        padding: 15px;
+        /* Reduced outer padding */
+    }
+
+    .booking-card {
+        padding: 24px 20px;
+        /* Tighter internal padding */
+        border-radius: 20px;
+    }
+
+    .card-header h2 {
+        font-size: 1.75rem;
+        /* Slightly smaller title */
+    }
+
+    .card-header p {
+        font-size: 0.9rem;
+    }
+
+    /* Stack Form Rows */
+    .form-row {
+        flex-direction: column;
+        gap: 16px;
+        /* Space between stacked items */
+    }
+
+    .form-group {
+        width: 100%;
+        /* Full width when stacked */
+    }
+
+    /* Adjust Date Carousel for Mobile */
+    .date-section {
+        padding: 12px;
+        /* Compact padding */
+    }
+
+    .date-card {
+        width: 54px;
+        /* Slightly narrower */
+        height: 64px;
+        flex: 0 0 auto;
+        /* Ensure no shrinking */
+    }
+
+    .date-card .day-number {
+        font-size: 1.1rem;
+    }
+
+    .custom-date-carousel {
+        gap: 8px;
+        /* Tighter gap */
+        padding-bottom: 5px;
+    }
+
+    /* Watermark Adjustments */
+    .watermark-row {
+        font-size: 12vw;
+        /* Larger absolute size but fewer lines visible effectively */
+        opacity: 0.03;
+        /* Fainter to avoid distraction */
+        line-height: 1.2;
+    }
+
+    /* Ensure inputs are touch-friendly */
+    input,
+    select,
+    textarea,
+    .custom-select-trigger {
+        font-size: 16px;
+        /* Prevent IOS zoom on focus */
+        height: 50px;
+        /* Comfortable touch target */
+    }
+}
+
+@media (max-width: 480px) {
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Further adjust watermark */
+    .watermark-row {
+        font-size: 15vw;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.spinner {
+    display: flex;
+    gap: 12px;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

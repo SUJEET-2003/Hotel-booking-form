@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Stay</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%236C63FF%22/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="watermark">
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+        <div class="watermark-row">BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY BOOK YOUR STAY</div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="booking-card">
+            <header class="card-header">
+                <h2>Book Your Stay</h2>
+                <p>Relaxation awaits you.</p>
+            </header>
+
+            <form id="bookingForm" class="booking-form" novalidate>
+
+                <!-- Date Picker Section -->
+                <div class="form-section date-section">
+                    <label class="section-label"><i class="fa-regular fa-calendar"></i> Select Dates</label>
+
+                    <div class="date-picker-group">
+                        <div class="date-input-wrapper">
+                            <div class="month-header">
+                                <span class="date-label">Check-in</span>
+                                <div class="month-nav">
+                                    <button type="button" id="prevMonthIn"><i
+                                            class="fa-solid fa-chevron-left"></i></button>
+
+                                    <!-- Seamless Trigger Wrapper -->
+                                    <div class="title-wrapper">
+                                        <span id="monthTriggerIn" class="header-trigger">Loading...</span>
+                                        <span id="yearTriggerIn" class="header-trigger">...</span>
+
+                                        <!-- Hidden Popups -->
+                                        <div id="monthListIn" class="header-dropdown"></div>
+                                        <div id="yearListIn" class="header-dropdown"></div>
+                                    </div>
+
+                                    <button type="button" id="nextMonthIn"><i
+                                            class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="custom-date-carousel" id="checkInCarousel">
+                                <!-- Dates will be injected here by JS -->
+                            </div>
+                            <input type="date" id="checkInInput" name="checkIn" required hidden>
+                        </div>
+
+                        <div class="date-input-wrapper">
+                            <div class="month-header">
+                                <span class="date-label">Check-out</span>
+                                <div class="month-nav">
+                                    <button type="button" id="prevMonthOut"><i
+                                            class="fa-solid fa-chevron-left"></i></button>
+
+                                    <!-- Seamless Trigger Wrapper -->
+                                    <div class="title-wrapper">
+                                        <span id="monthTriggerOut" class="header-trigger">Loading...</span>
+                                        <span id="yearTriggerOut" class="header-trigger">...</span>
+
+                                        <!-- Hidden Popups -->
+                                        <div id="monthListOut" class="header-dropdown"></div>
+                                        <div id="yearListOut" class="header-dropdown"></div>
+                                    </div>
+
+                                    <button type="button" id="nextMonthOut"><i
+                                            class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="custom-date-carousel" id="checkOutCarousel">
+                                <!-- Dates will be injected here by JS -->
+                            </div>
+                            <input type="date" id="checkOutInput" name="checkOut" required hidden>
+                        </div>
+                    </div>
+                    <div id="dateError" class="error-message"></div>
+                </div>
+
+                <!-- Guest & Room Details -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="roomType"><i class="fa-solid fa-bed"></i> Room Type</label>
+                        <div class="custom-select" id="roomTypeSelect">
+                            <div class="custom-select-trigger"><span>Select Room</span> <i
+                                    class="fa-solid fa-chevron-down"></i></div>
+                            <div class="custom-options">
+                                <div class="custom-option" data-value="single">Single Room</div>
+                                <div class="custom-option" data-value="double">Double Room</div>
+                                <div class="custom-option" data-value="suite">Luxury Suite</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="roomType" name="roomType" required>
+                        <div id="roomTypeError" class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guestCount"><i class="fa-solid fa-user-group"></i> Guests</label>
+                        <input type="number" id="guestCount" name="guestCount" min="1" max="10" placeholder="2"
+                            required>
+                        <div id="guestError" class="error-message"></div>
+                    </div>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="form-group full-width">
+                    <label for="requests"><i class="fa-regular fa-comment-dots"></i> Special Requests (Optional)</label>
+                    <textarea id="requests" name="requests" rows="2" placeholder="Any specific preferences?"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span>Book Now</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <div id="formMessage" class="form-message"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
